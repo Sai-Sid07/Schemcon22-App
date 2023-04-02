@@ -1,0 +1,161 @@
+<%- include("partials/header.ejs") %>
+
+<!-- Ignite UI for jQuery Required Combined CSS Files -->
+<link href="http://cdn-na.infragistics.com/igniteui/2022.1/latest/css/themes/infragistics/infragistics.theme.css" rel="stylesheet" />
+<link href="http://cdn-na.infragistics.com/igniteui/2022.1/latest/css/structure/infragistics.css" rel="stylesheet" />
+
+<script src="http://ajax.aspnetcdn.com/ajax/modernizr/modernizr-2.8.3.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+
+<!-- Ignite UI for jQuery Required Combined JavaScript Files -->
+<script src="http://cdn-na.infragistics.com/igniteui/2022.1/latest/js/infragistics.core.js"></script>
+<script src="http://cdn-na.infragistics.com/igniteui/2022.1/latest/js/infragistics.lob.js"></script>
+
+<style>        
+    .combo-label {margin-bottom:.5em;}
+    .ui-corner-all{
+        border-radius: 4px;
+    }
+    a{
+        text-decoration: none;
+        color: white;
+    }
+</style>
+<body class="text-white bg-image" style="background-image: url('images/choiceBackground 1.png');
+background-attachment: fixed; background-size: cover;">
+    <%if(count <= process){%>
+        <div class="container-fluid mt-3 px-3 mb-2" style="height:35px">
+            <div class="progress-dark">
+                <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated text-black" role="progressbar" aria-label="Example with label" 
+                style="min-width: 20px;" aria-valuenow="<%= count %>" 
+                aria-valuemin="0" aria-valuemax="<%= process %>"><b><%=count%>/<%=process%></b></div>
+            </div>
+            <br />
+        </div>
+        <div class="container-fluid">
+            <div class="row justify-content-md-center">
+                <div class="col col-lg-2">
+                    <h3 class="display-3">Heading</h3>
+                </div>
+            </div>   
+            <div class="row justify-content-md-center">
+                <div class="col col-md-auto">
+                    <p class="lead">
+                        Choose Folders or you can create your own sub-directory if it isn't listed below.   
+                    </p>
+                </div>
+            </div>         
+            <form action="/uploads" method="post">
+                <div class="row justify-content-md-center">
+                    <div class="col col-lg-2 mb-4 mt-2 me-3 ms-3">
+                        <p class="h4">Chemical</p>
+                        <div id="chemical" name="chemical"></div>
+                    </div>
+                    <div class="col col-lg-2 mb-4 mt-2 me-3 ms-3">
+                        <p class="h4">Technology</p>
+                        <div id="technology" name="technology"></div>
+                    </div>
+                    <div class="col col-lg-2 mb-4 mt-2 me-3 ms-3">
+                        <p class="h4">Equipment</p>
+                        <div id="equipment" name="equipment"></div>
+                    </div>
+                </div>
+                <input type="hidden" name="count" value="<%=count%>">
+                <input type="hidden" name="process" value="<%=process%>">
+                <div class="row">
+                    <%# ms-xxl-4 -> Col 1, ms-xxl-2 - Submit -> Values for Monitor %> 
+                    <div class="col col-lg-2 mb-4 me-5">
+                    </div>
+                    <div class="col col-lg-2 mb-4 me-5 ms-5 ">
+                        <button type="submit" class="btn btn-outline-warning">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    <%}else{%>
+        <h1>Home Page Redirect</h1>
+        <button type="submit" class="btn btn-primary">
+            <a href="/">Redirect to Home Page</a>
+        </button>
+    <%}%>
+    <script>
+        var chemical = [
+            { Name: "MSDS" },
+            { Name: "Reactivity Data" },
+            { Name: "Toxity Information" },
+            { Name: "Permissible Exposure Limited" },
+            { Name: "Physical Data" },
+            { Name: "Corrosivity Data" },
+            { Name: "Thermal Stability Data" },
+            { Name: "Chemical Stability Data" },
+            { Name: "Chemical Reactivity Worksheet" },
+            { Name: "Other" }
+        ];
+
+        var technology = [
+            { Name: "Block Flow Diagram" },
+            { Name: "Process Description" },
+            { Name: "Other" }
+        ];
+
+        var equipment = [
+            { Name: "Matrial Construction" },
+            { Name: "PIDs" },
+            { Name: "Electrical Classification" },
+            { Name: "Relief System Design and Design basis" },
+            { Name: "Ventilation Design System" },
+            { Name: "Design Codes and Standards" },
+            { Name: "Material and Energy Balance" },
+            { Name: "List of Interlocks" },
+            { Name: "List of Detection Systems" },
+            { Name: "List of Suppression Systems" },
+            { Name: "Emergency Procedures" },
+            { Name: "Standard Operating Procedures" },
+            { Name: "Other" }
+        ];
+
+
+        $(function () {
+            var bar = document.querySelector(".progress-bar");
+            var countElement = parseInt('<%= count %>')
+            var processElement = parseInt('<%= process %>')
+            var width = parseInt(100/processElement) * countElement;
+            bar.style.width = width + "%";
+
+            $("#chemical").igCombo({
+                width: 250,
+                dataSource: chemical,
+                textKey: "Name",
+                valueKey: "Name",
+                multiSelection: {
+                    enabled: true,
+                    showCheckboxes: true
+                },
+                dropDownOrientation: "bottom"
+            });
+            $("#technology").igCombo({
+                width: 250,
+                dataSource: technology,
+                textKey: "Name",
+                valueKey: "Name",
+                multiSelection: {
+                    enabled: true,
+                    showCheckboxes: true
+                },
+                dropDownOrientation: "bottom"
+            });
+            $("#equipment").igCombo({
+                width: 250,
+                dataSource: equipment,
+                textKey: "Name",
+                valueKey: "Name",
+                multiSelection: {
+                    enabled: true,
+                    showCheckboxes: true
+                },
+                dropDownOrientation: "bottom"
+            });
+        });
+    </script>
+<%- include("partials/footer.ejs") %>

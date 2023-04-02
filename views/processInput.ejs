@@ -1,0 +1,30 @@
+<%- include("partials/header.ejs") %> 
+<body class="text-white bg-image" style="background-image: url('images/optionsBackground.png');
+background-attachment: fixed; background-size: cover;">
+<style>
+    input[type="text"] {
+        background-color: rgba(199, 199, 199, 0.795);
+        border: none;
+        color: whitesmoke;
+    }
+    input[type="text"]::placeholder{
+        color: black;
+        font-weight: 600;
+        text-align: center;
+
+    }
+</style>
+<div class="d-flex justify-content-center py-4">
+    <h3 class="display-4 fw-bold" style="letter-spacing:8px">PROCESS DETAILS</h3>
+</div>
+<div class="container-fluid bg-image shadow-2-strong">
+    <div class="d-flex flex-column align-items-center justify-content-center" >
+        <form action="/" method="post">
+            <div class="mb-3">
+                <input type="text" class="form-control" id="exampleFormControlInput1" 
+                name="process" placeholder="Enter number of process" autocomplete="off">
+            </div>
+        </form>
+    </div>
+</div>
+<%- include("partials/footer.ejs") %> 

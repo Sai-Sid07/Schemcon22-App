@@ -1,0 +1,37 @@
+<%- include("partials/header.ejs") %>
+<body class="text-white bg-image" style="background-color: black;
+background-attachment: fixed; background-size: cover; background-position: center; font-family: Nunito Sans;" >
+<style>
+    a{
+        text-decoration: none;
+        color: white;
+    }
+</style>
+<div class="container-fluid py-3 mt-2">
+    <h3 class="display-4 fw-bold"><%= directoryName %> Directory</h3>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item text-white" aria-current="page">View</li>
+        <li class="breadcrumb-item active text-white" aria-current="page"><%= directoryName %></li>
+        </ol>
+    </nav>
+    <div class="container-fluid pb-4 pt-4">
+        <% subFolders.forEach(function(subFolder, index){ %>
+        <div class="d-flex mb-2 align-items-center">
+            <h2><i class="bi bi-folder-fill fs-4" style="color:#73d0fb"><span class="px-2" style="color:white"><%= subFolder %></span></i></h2>
+        </div>
+        <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3 pb-3">
+            <% files[index].forEach(file => { %>
+                <i class="bi bi-file-text fs-6" style="color:#f4cc80">
+                    <a href="/views/<%= directoryName %>/<%= subFolder %>/<%= file %>">
+                        <span class="px-2" style="color:white" ><%= file %></span>
+                    </a>
+                </i>
+            <% }) %>
+        </div>
+        <% }) %>        
+    </div>    
+</div>
+
+<%- include("partials/footer.ejs") %>

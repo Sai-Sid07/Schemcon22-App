@@ -1,0 +1,80 @@
+<section class="pb-4 pt-4">
+  <div class="d-flex mb-2 align-items-center">
+      <h2>Latest Indian Recipes</h2>
+      <a href="/explore-latest" class="ms-auto">View More</a>
+  </div>
+  <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+      <% if(typeof indian !== "undefined" && indian.length > 0){ %>
+          <% indian.forEach(function(indianR, index){ %>
+              <a href="/recipe/<%=indianR._id%>" class="col text-center category__link">
+                  <div class="category__img category__img--large shadow">
+                      <img src="uploads/<%=indianR.image%>">
+                  </div>
+                  <div class="pt-1"><%=indianR.name%></div>
+              </a>
+          <% }) %>
+      <%}%>
+  </div>
+
+</section>
+
+<section class="pb-4 pt-4">
+  <div class="d-flex mb-2 align-items-center">
+    <% subFolders.forEach(function(subFolder, index){ %>
+      <h2><i class="bi bi-folder fs-4"><span class="px-2"><%= subFolder %></span></i></h2>
+  </div>
+  <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+    <% files[index].forEach(file => { %>
+      <i class="bi bi-file-text fs-6">
+        <a href="/views/<%= directoryName %>/<%= subFolder %>/<%= file %>">
+          <span class="px-2"><%= file %></span>
+        </a>
+      </i>
+    <% }) %>
+  </div>
+  <%}%>
+</section>
+
+<ul>
+  <% subFolders.forEach(function(subFolder, index){ %>
+      <li class="pb-2"><i class="bi bi-folder fs-4"><span class="px-2"><%= subFolder %></span></i></li>
+      <ul>
+          <% files[index].forEach(file => { %>
+              <li class="pb-2">
+                  <i class="bi bi-file-text fs-6">
+                      <a href="/views/<%= directoryName %>/<%= subFolder %>/<%= file %>">
+                          <span class="px-2"><%= file %></span>
+                      </a>
+                  </i>
+              </li>
+          <% }) %>
+      </ul>
+  <% }) %>
+</ul>
+
+<div class="container-fluid py-3 mt-2">
+  <h3 class="display-4"><%= directoryName %> Directory</h3>
+  <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-item text-white" aria-current="page">View</li>
+      <li class="breadcrumb-item active text-white" aria-current="page"><%= directoryName %></li>
+      </ol>
+  </nav>
+  <div class="container-fluid pb-4 pt-4">
+      <div class="d-flex mb-2 align-items-center">
+          <% subFolders.forEach(function(subFolder, index){ %>
+          <h2><i class="bi bi-folder fs-4"><span class="px-2"><%= subFolder %></span></i></h2>
+      </div>
+      <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+          <% files[index].forEach(file => { %>
+              <i class="bi bi-file-text fs-6">
+                  <a href="/views/<%= directoryName %>/<%= subFolder %>/<%= file %>">
+                      <span class="px-2"><%= file %></span>
+                  </a>
+              </i>
+          <% }) %>
+      </div>
+      <%})%>
+  </div>    
+</div>

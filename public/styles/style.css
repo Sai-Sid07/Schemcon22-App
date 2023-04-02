@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif&family=Spectral&display=swap');
+
+
+ul, li{
+    list-style: none;
+    line-height: 30px;
+    
+}
+i{
+    font-style: normal;
+}
+.navbar-brand.abs{
+    position: absolute;
+    width: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+.navbar{
+    border-bottom: 1px solid rgba(255, 255, 255, 0.367);
+    
+}
+a{
+    text-decoration: none;
+    color:cadetblue;
+}
+
+  #intro {
+    background-image: url("/images/processInput.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+  }
+  
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    border-radius: 3px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #626262; 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #404040; 
+  } 

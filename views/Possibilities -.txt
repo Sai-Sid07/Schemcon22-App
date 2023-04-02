@@ -1,0 +1,13 @@
+Possibilities -
+Chem -> Tech -> Equip
+Tech -> Equip
+Chem -> Equip
+Chem
+Tech
+Equip
+
+Done
+Chem -> Equip
+
+Cycle ->
+processInput -> Post to "/" -> 

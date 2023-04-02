@@ -1,0 +1,70 @@
+<%- include("partials/header.ejs") %>
+<body class="text-white bg-image" style="background-image: url('images/technologyUploadBackground.png');
+background-attachment: fixed; background-size: cover;">
+<% if (iter < equipArr.length  && equipArr[0] != '') { %>
+    <div class="container-fluid my-3 px-3">
+        <div class="progress-dark" style="height: 30px;">
+            <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated text-black" 
+            role="progressbar" aria-label="Example with label" style="min-width: 20px;" 
+            aria-valuenow="<%= iter + 1 %>"aria-valuemin="0" aria-valuemax="<%= equipArr.length %>">            
+            <b><%= iter + 1 %>/<%= equipArr.length %></b></div>
+        </div>
+        <h1 class="display-3">Equipment Files Upload</h1>
+        <br/>
+    </div>
+    <% if (equipArr[iter] == "Other") { %>
+        <div class="container-fluid my-3 px-3">
+            <form method="post" action="/equipUpload" enctype="multipart/form-data">
+                <p class="lead">
+                    <u class="h5"><b>Directory:</b></u>  Equipment/<%=equipArr[iter]%>/
+                </p>
+                <div class="input-group mb-3 w-25">
+                    <span class="input-group-text" id="basic-addon1">Folder Name</span>
+                    <input type="text" class="form-control" placeholder="Enter Folder Name" name="folderName" autocomplete="off">
+                </div>
+                <div class="input-group mb-3 w-25">
+                    <input type="file" class="form-control" id="inputGroupFile02" name="equipment" autocomplete="off">
+                    <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                </div>
+                <div class="input-group mb-3 w-25">
+                    <span class="input-group-text" id="basic-addon1">File Name</span>
+                    <input type="text" class="form-control" placeholder="Enter File Name" name="fileName" autocomplete="off">
+                </div>
+                <button type="submit" class="btn btn-outline-warning">Submit</button>
+            </form>
+        </div>
+    <% }else{ %>
+        <div class="container-fluid my-3 px-3">
+            <form method="post" action="/equipUpload" enctype="multipart/form-data">
+                <p class="lead">
+                    <u class="h5"><b>Directory:</b></u>  Equipment/<%=equipArr[iter]%>/
+                </p>
+                <div class="input-group mb-3 w-25">
+                    <input type="file" class="form-control" id="inputGroupFile02" name="equipment" autocomplete="off">
+                    <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                </div>
+                <div class="input-group mb-3 w-25">
+                    <span class="input-group-text" id="basic-addon1">File Name</span>
+                    <input type="text" class="form-control" placeholder="Enter File Name" name="fileName" autocomplete="off">
+                </div>
+                <input type="hidden" name="subDirectory" value="<%= equipArr[iter] %>">
+                <button type="submit" class="btn btn-outline-warning">Submit</button>
+            </form>
+        </div>
+    <% } %>
+<%} else{%>
+    <h1>Direct to Equipment Files Upload</h1>
+    <form method="post" action="/">
+        <input type="hidden" name="count" value="<%= count %>">
+        <input type="hidden" name="process" value="<%= process %>">
+        <button type="submit" class="btn btn-primary">Select Topics for Process <%= count++%></button>
+    </form>
+<%}%>
+<script>
+    var bar = document.querySelector(".progress-bar");
+    var iterElement = parseInt('<%= iter + 1 %>')
+    var totalProcess = parseInt('<%= techArr.length %>')
+    var width = parseInt(100/totalProcess) * iterElement;
+    bar.style.width = width + "%";
+</script>
+<%- include("partials/footer.ejs") %>
